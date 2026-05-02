@@ -1,6 +1,6 @@
 let offset = 0;
 let limit = 20;
-let maxPokemons = 60;
+let maxPokemons = 1000;
 
 let START = 1;
 let STOP = 20;
@@ -11,16 +11,30 @@ let pokemonDetails = [];
 let currentIndex = 0;
 
 async function init() {
-    document.getElementById("load-spinner").classList.remove("hidden");
+    try {
+        const spinner = document.getElementById("load-spinner");
+        spinner.classList.remove("hidden");
 
-    await fetchPokemonList();
-    await fetchPokemonDetails();
-    renderPokemonCards();
+        const startTime = Date.now();
 
-    showLoadButton();
-    updateLoadButton();
+        await fetchPokemonList();
+        await fetchPokemonDetails();
+        renderPokemonCards();
 
-    document.getElementById("load-spinner").classList.add("hidden");
+        showLoadButton();
+        updateLoadButton();
+
+        const elapsed = Date.now() - startTime;
+        const minDuration = 1500;
+        const delay = Math.max(0, minDuration - elapsed);
+
+        setTimeout(() => {
+            spinner.classList.add("hidden");
+        }, delay);
+    } catch (error) {
+        console.error("Fehler beim Laden der Pokémon:", error);
+        document.getElementById("load-spinner").classList.add("hidden");
+    }
 }
 
 /* GET Pokemon List*/
@@ -294,6 +308,14 @@ function searchPokemon() {
         return;
     }
 
+    if (input.length < 3) {
+        renderPokemonCards();
+        if (pokemonDetails.length < maxPokemons) {
+            btnDiv.classList.remove("d-none");
+        }
+        return;
+    }
+
     btnDiv.classList.add("d-none");
 
     let found = false;
@@ -339,6 +361,10 @@ function filterPokemonType(type) {
 
 //Load next 20 Pokemon --> Button//
 async function bulkLoadNextPokemon() {
+    const spinner = document.getElementById("load-spinner");
+    spinner.classList.remove("hidden");
+
+    const startTime = Date.now();
 
     START = STOP + 1;
     STOP = START + 19; 
@@ -354,6 +380,14 @@ async function bulkLoadNextPokemon() {
 
     renderPokemonCards();
     updateLoadButton();
+
+    const elapsed = Date.now() - startTime;
+    const minDuration = 1500;
+    const delay = Math.max(0, minDuration - elapsed);
+
+    setTimeout(() => {
+        spinner.classList.add("hidden");
+    }, delay);
 }
 
 //Load single Pokemon Data//

@@ -6,6 +6,10 @@
   font-family: "Audiowide", sans-serif;
 }
 
+.hidden {
+  display: none !important;
+}
+
 main {
   flex-grow: 1;
   padding-bottom: 40px;
