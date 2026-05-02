@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="./assets/styles/spinner.css">
+    <link rel="stylesheet" href="./assets/styles/assets.css">
+    <link rel="stylesheet" href="./assets/styles/standart.css">
+      <link rel="icon" type="image/png" href="./assets/icons/poke-icon.png" />
+    <link rel="stylesheet" href="style.css">
+    <script src="./assets/scripts/template.js" defer></script>
+    <script src="script.js" defer></script>
+
+
+    <title>Pokedex</title>
+</head>
+
+<header>
+    <div class="header-left">
+        <a href="index.html"><img src="./assets/icons/poke-logo.png" alt="Logo Pokedex"></a>
+
+        <span>Pokedex</span>
+    </div>
+    <div>
+        <input type="text" placeholder="Search.." class="search-input" id="searchInput" oninput="searchPokemon()">
+    </div>
+</header>
+
+<body onload="init()">
+
+    <!-- Spinner -->
+    <div id="load-spinner">
+        <img src="./assets/icons/spinner.png" alt="Loading...">
+    </div>
+
+    <main>
+        <div id="content"></div>
+
+
+        <div id="load-btn-div" class="load-btn-div d-none">
+            <button id="load-btn" class="load-btn" onclick="bulkLoadNextPokemon()">Load more Pokémon</button>
+            <p id="note"></p>
+        </div>
+
+
+        <dialog id="pokemon-dialog" aria-labelledby="dialog-title" onclick="this.close()">
+            <div id="dialog-content" onclick="event.stopPropagation()">
+            </div>
+        </dialog>
+    </main>
+
+</body>
+
+<!-- Footer Section -->
+<footer class="footer-container">
+    <div>
+        <img src="./assets/icons/poke-logo.png" class="footer-icon" alt="Logo Pokedex" />
+    </div>
+    <div>
+        <p>&copy; 2026 by Vinh Tran. Alle Rechte vorbehalten.</p>
+    </div>
+
+</footer>
+
+</html>
