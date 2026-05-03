@@ -27,7 +27,8 @@
         <span>Pokedex</span>
     </div>
     <div>
-        <input type="text" placeholder="Search.." class="search-input" id="searchInput" oninput="searchPokemon()">
+        <input type="text" placeholder="Enter 3 Letters" class="search-input" id="searchInput" onkeydown="if(event.key==='Enter') searchPokemon()" oninput="handleSearchInput()">
+        <button class="search-btn" onclick="searchPokemon()">🔍</button>
     </div>
 </header>
 
