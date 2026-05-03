@@ -294,18 +294,16 @@ function renderPokemonCards() {
 }
 
 function handleSearchInput() {
-    // Placeholder für zukünftige Validierung
-    // Suchfunktion startet nur mit Enter oder Button-Click
+    // Placeholder - search only starts on Enter or button click
 }
 
 function searchPokemon() {
     let input = document.getElementById('searchInput').value.toLowerCase().trim();
     let pokemonList = document.getElementById("content");
-    pokemonList.innerHTML = "";
-
     const btnDiv = document.getElementById("load-btn-div");
     const returnBtnDiv = document.getElementById("return-btn-div");
 
+    // If less than 3 characters, show all pokemon and hide return button
     if (input.length < 3) {
         renderPokemonCards();
         btnDiv.classList.remove("d-none");
@@ -313,21 +311,26 @@ function searchPokemon() {
         return;
     }
 
+    // Clear container and hide load button, show return button
+    pokemonList.innerHTML = "";
     btnDiv.classList.add("d-none");
     returnBtnDiv.classList.remove("d-none");
 
+    // Search for pokemon by name or id
     let found = false;
     for (let pkmDataIndex = 0; pkmDataIndex < pokemonDetails.length; pkmDataIndex++) {
-        const pkmName = pokemonDetails[pkmDataIndex].name.toLowerCase();
-        const pkmId = pokemonDetails[pkmDataIndex].id.toString();
+        const pokemon = pokemonDetails[pkmDataIndex];
+        const pkmName = pokemon.name.toLowerCase();
+        const pkmId = pokemon.id.toString();
+        
         if (pkmName.includes(input) || pkmId.includes(input)) {
-            const pokemon = pokemonDetails[pkmDataIndex];
             const typeClass = `type-${pokemon.types[0].type.name}`;
             pokemonList.innerHTML += getPokemonCardTemplate(pokemon, pkmDataIndex, typeClass);
             found = true;
         }
     }
 
+    // Show error message if no pokemon found
     if (!found) {
         pokemonList.innerHTML = "<p class='no-results'>Kein Pokémon gefunden.</p>";
     }
