@@ -295,7 +295,7 @@ function renderPokemonCards() {
 
 function handleSearchInput() {
     let input = document.getElementById('searchInput').value.toLowerCase().trim();
-    let pokemonList = document.getElementById("content");
+    let pokemonContainer = document.getElementById("content");
     const btnDiv = document.getElementById("load-btn-div");
     const returnBtnDiv = document.getElementById("return-btn-div");
 
@@ -307,7 +307,7 @@ function handleSearchInput() {
     }
 
     // Filter and display results
-    pokemonList.innerHTML = "";
+    pokemonContainer.innerHTML = "";
     btnDiv.classList.add("d-none");
     returnBtnDiv.classList.remove("d-none");
 
@@ -318,20 +318,20 @@ function handleSearchInput() {
         if (pkmName.includes(input) || pkmId.includes(input)) {
             const pokemon = pokemonDetails[pkmDataIndex];
             const typeClass = `type-${pokemon.types[0].type.name}`;
-            pokemonList.innerHTML += getPokemonCardTemplate(pokemon, pkmDataIndex, typeClass);
+            pokemonContainer.innerHTML += getPokemonCardTemplate(pokemon, pkmDataIndex, typeClass);
             found = true;
         }
     }
 
     if (!found) {
-        pokemonList.innerHTML = "<p class='no-results'>Kein Pokémon gefunden.</p>";
+        pokemonContainer.innerHTML = "<p class='no-results'>Kein Pokémon gefunden.</p>";
     }
 }
 
 function searchPokemon() {
     let input = document.getElementById('searchInput').value.toLowerCase().trim();
-    let pokemonList = document.getElementById("content");
-    pokemonList.innerHTML = "";
+    let pokemonContainer = document.getElementById("content");
+    pokemonContainer.innerHTML = "";
 
     const btnDiv = document.getElementById("load-btn-div");
     const returnBtnDiv = document.getElementById("return-btn-div");
@@ -353,13 +353,13 @@ function searchPokemon() {
         if (pkmName.includes(input) || pkmId.includes(input)) {
             const pokemon = pokemonDetails[pkmDataIndex];
             const typeClass = `type-${pokemon.types[0].type.name}`;
-            pokemonList.innerHTML += getPokemonCardTemplate(pokemon, pkmDataIndex, typeClass);
+            pokemonContainer.innerHTML += getPokemonCardTemplate(pokemon, pkmDataIndex, typeClass);
             found = true;
         }
     }
 
     if (!found) {
-        pokemonList.innerHTML = "<p class='no-results'>Kein Pokémon gefunden.</p>";
+        pokemonContainer.innerHTML = "<p class='no-results'>Kein Pokémon gefunden.</p>";
     }
 }
 
