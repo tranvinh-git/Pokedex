@@ -294,38 +294,8 @@ function renderPokemonCards() {
 }
 
 function handleSearchInput() {
-    let input = document.getElementById('searchInput').value.toLowerCase().trim();
-    let pokemonList = document.getElementById("content");
-    const btnDiv = document.getElementById("load-btn-div");
-    const returnBtnDiv = document.getElementById("return-btn-div");
-
-    if (input.length < 3) {
-        renderPokemonCards();
-        btnDiv.classList.remove("d-none");
-        returnBtnDiv.classList.add("d-none");
-        return;
-    }
-
-    // Filter and display results
-    pokemonList.innerHTML = "";
-    btnDiv.classList.add("d-none");
-    returnBtnDiv.classList.remove("d-none");
-
-    let found = false;
-    for (let pkmDataIndex = 0; pkmDataIndex < pokemonDetails.length; pkmDataIndex++) {
-        const pkmName = pokemonDetails[pkmDataIndex].name.toLowerCase();
-        const pkmId = pokemonDetails[pkmDataIndex].id.toString();
-        if (pkmName.includes(input) || pkmId.includes(input)) {
-            const pokemon = pokemonDetails[pkmDataIndex];
-            const typeClass = `type-${pokemon.types[0].type.name}`;
-            pokemonList.innerHTML += getPokemonCardTemplate(pokemon, pkmDataIndex, typeClass);
-            found = true;
-        }
-    }
-
-    if (!found) {
-        pokemonList.innerHTML = "<p class='no-results'>Kein Pokémon gefunden.</p>";
-    }
+    // Placeholder für zukünftige Validierung
+    // Suchfunktion startet nur mit Enter oder Button-Click
 }
 
 function searchPokemon() {
