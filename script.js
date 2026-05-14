@@ -37,7 +37,6 @@ async function init() {
     }
 }
 
-/* GET Pokemon List*/
 async function fetchPokemonList() {
     try {
         const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
@@ -58,7 +57,6 @@ async function fetchPokemonList() {
     }
 }
 
-/* Loading Pokemon into Array*/
 async function fetchPokemonDetails() {
     try {
         for (let index = pokemonDetails.length; index < pokemonList.length; index++) {
@@ -88,7 +86,7 @@ function renderAllPokemons(list = pokemonDetails) {
     for (let pokemonindex = 0; pokemonindex < list.length; pokemonindex++) {
         const pokemon = list[pokemonindex];
 
-        const originalIndex = pokemonDetails.findIndex(p => p.id === pokemon.id); 
+        const originalIndex = pokemonDetails.findIndex(p => p.id === pokemon.id);
 
         const typeClass = `type-${pokemon.types[0].type.name}`;
 
@@ -108,7 +106,6 @@ function getPokemonTypesHTML(pokemon) {
     return typesHTML;
 }
 
-//Dialog-section
 function openDialog(pokemonindex) {
     currentIndex = pokemonindex;
     const pokemon = pokemonDetails[pokemonindex];
@@ -293,10 +290,6 @@ function renderPokemonCards() {
     }
 }
 
-function handleSearchInput() {
-    // Placeholder - search only starts on Enter or button click
-}
-
 async function searchPokemon() {
     const input = document.getElementById("searchInput").value.toLowerCase().trim();
     const pokemonListContainer = document.getElementById("content");
@@ -325,10 +318,7 @@ async function searchPokemon() {
             const pokemon = pokemonDetails[i];
             const typeClass = `type-${pokemon.types[0].type.name}`;
             pokemonListContainer.innerHTML += getPokemonCardTemplate(
-                pokemon,
-                i,
-                typeClass
-            );
+                pokemon, i, typeClass);
             found = true;
         }
     }
@@ -336,7 +326,7 @@ async function searchPokemon() {
     if (!found) {
         pokemonListContainer.innerHTML = `
             <p class="no-results error">
-                ❌ Kein Pokémon mit dem Namen "<strong>${input}</strong>" gefunden
+                Kein Pokémon mit dem Namen "<strong>${input}</strong>" gefunden
             </p>
         `;
         console.error(`Search Error: Pokémon "${input}" nicht gefunden`);
@@ -344,6 +334,7 @@ async function searchPokemon() {
 
     spinner.classList.add("hidden");
 }
+
 function returnToList() {
     renderPokemonCards();
     document.getElementById("load-btn-div").classList.remove("d-none");
@@ -369,7 +360,6 @@ function filterPokemonType(type) {
     }
 }
 
-//Load next 20 Pokemon --> Button//
 async function bulkLoadNextPokemon() {
     const spinner = document.getElementById("load-spinner");
     spinner.classList.remove("hidden");
@@ -377,9 +367,9 @@ async function bulkLoadNextPokemon() {
     const startTime = Date.now();
 
     START = STOP + 1;
-    STOP = START + 19; 
+    STOP = START + 19;
 
-    for (let id = START; id <= STOP; id++) { 
+    for (let id = START; id <= STOP; id++) {
         try {
             const currentPokemon = await loadPokemonData(id);
             pokemonDetails.push(currentPokemon);
@@ -400,7 +390,6 @@ async function bulkLoadNextPokemon() {
     }, delay);
 }
 
-//Load single Pokemon Data//
 async function loadPokemonData(id) {
     let url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
     let response = await fetch(url);
